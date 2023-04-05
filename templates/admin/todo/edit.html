@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update todo</title>
+</head>
+<body>
+  <h1>Edit Todo</h1>
+
+  <form method="post" action="{{ url_for('todo.edit', id=todo.id) }}">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" name="title" id="title" class="form-control" value="{{ form.title.data }}" required maxlength="255">
+      {% for error in form.title.errors %}
+        <div class="invalid-feedback">{{ error }}</div>
+      {% endfor %}
+    </div>
+    <div class="form-group">
+      <label for="content">Description</label>
+      <textarea name="content" id="content" class="form-control">{{ form.content.data }}</textarea>
+      {% for error in form.content.errors %}
+        <div class="invalid-feedback">{{ error }}</div>
+      {% endfor %}
+    </div>
+
+    <button type="submit">Update</button>
+  </form>
+</body>
